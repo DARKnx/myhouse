@@ -20,7 +20,6 @@ const Categorys = () => {
         return toast.error("Erro ao carregar categorias.");
     }
     setCategorys(response);
-    console.log(response.length)
   }
 
   const deleteCategory = async (id) => {

@@ -29,6 +29,15 @@ const me = async () => {
     }
 }
 
+const get = async () => {
+    try {
+        const response = await api.get('/user/all');
+        return response.data;
+    } catch (error) {
+        return { error: error?.response?.data?.msg };
+    }
+}
+
 const update = async (data) => {
     try {
         const response = await api.put('/user/update', { data });
@@ -38,6 +47,15 @@ const update = async (data) => {
     }
 }
 
+const remove = async (data) => {
+    try {
+        const response = await api.delete('/user/delete', { data });
+        return response.data;
+    } catch (error) {
+        return { error: error?.response?.data?.msg };
+    }
+}
+
 export default {
-    signIn, signUp, me, update
+    signIn, signUp, me, update, get, remove
 }

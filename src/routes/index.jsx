@@ -9,6 +9,7 @@ import Settings from "../pages/settings";
 import Cart from "../pages/cart";
 import Profile from "../pages/profile";
 import Categorys from "../pages/categorys";
+import Users from "../pages/users";
 
 export const Router = () => {
   return (
@@ -37,6 +38,10 @@ export const Router = () => {
         <Route
           path="/dashboard/category"
           element={<Auth element={<Categorys />} />}
+        />
+        <Route
+          path="/dashboard/users"
+          element={<Auth element={<Users />} />}
         />
       </Routes>
     </BrowserRouter>
