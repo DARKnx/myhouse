@@ -7,6 +7,7 @@ import Layout from '../../../components/layout';
 import Button from '../../../components/button';
 import Input from '../../../components/input';
 import cart from '../../../actions/cart';
+import Dropdown from '../../../components/dropdown';
 
 const CartEditor = ({data, id, onBack}) => {
     const [values, setValues] = useState({name:"", description:"", priority: 1});
@@ -36,6 +37,7 @@ const CartEditor = ({data, id, onBack}) => {
                   <Label>Nivel de prioridade</Label>
                 </LabelContainer>
                   <ColorRadio value={values.priority} setValue={(x) => setValues({...values, priority: x})}/>
+                  <Dropdown options={['1', '2']} value={'1'} setValue={(x) => console.log(x)}/>
                 <ButtonsContainer>
                   <Button name={"CANCELAR"} color='error'  text='text' width="50%" onClick={onBack}/>
                   <Button name={id ? "ATUALIZAR" : "CRIAR"}  width="50%" onClick={sendData}/>

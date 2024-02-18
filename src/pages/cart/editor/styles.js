@@ -30,7 +30,8 @@ export const ButtonsContainer = styled.div`
 
 export const Label = styled.label`
     color: ${({theme}) => theme.colors.secondaryText};
-    margin: 5px 0;
+    margin-bottom: 5px;
+    margin-top: 10px;
 `
 
 export const LabelContainer = styled.div`
