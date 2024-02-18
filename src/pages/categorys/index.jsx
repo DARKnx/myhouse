@@ -4,14 +4,14 @@ import { Container } from './styles';
 import Navinfo from '../../components/navinfo';
 import Layout from '../../components/layout';
 
-const Cart = () => {
+const Categorys = () => {
 
   return (
     <Layout>
-      <Navinfo name={"carrinho"} subname={"items"} buttonName={"adicionar"} size={1}/>
+      <Navinfo name={"Categorias"} subname={"categorias"} buttonName={"adicionar"} size={1}/>
 
     </Layout>
   );
 }
 
-export default Cart;
+export default Categorys;

@@ -8,6 +8,7 @@ import Auth from "./auth";
 import Settings from "../pages/settings";
 import Cart from "../pages/cart";
 import Profile from "../pages/profile";
+import Categorys from "../pages/categorys";
 
 export const Router = () => {
   return (
@@ -32,6 +33,10 @@ export const Router = () => {
         <Route
           path="/dashboard/profile"
           element={<Auth element={<Profile />} />}
+        />
+        <Route
+          path="/dashboard/category"
+          element={<Auth element={<Categorys />} />}
         />
       </Routes>
     </BrowserRouter>

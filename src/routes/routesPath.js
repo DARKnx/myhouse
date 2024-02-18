@@ -1,4 +1,4 @@
-import { AiOutlineHome, AiOutlineShoppingCart, AiOutlineSolution, AiOutlineSetting } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineShoppingCart, AiOutlineSolution, AiOutlineSetting, AiOutlineFolderAdd } from "react-icons/ai";
 
 const routesPath = [
       {
@@ -10,6 +10,11 @@ const routesPath = [
         name: "Carrinho",
         icon: AiOutlineShoppingCart,
         route: "/dashboard/cart"
+      },
+      {
+        name: "Categorias",
+        icon: AiOutlineFolderAdd,
+        route: "/dashboard/category"
       },
       {
         name: "Sobre mim",
