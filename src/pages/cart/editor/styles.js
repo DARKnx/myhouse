@@ -17,7 +17,7 @@ export const Box = styled.div`
     padding: 5vw 5vh;
     display: flex;
     height: auto;
-    width: 30%;
+    width: 60%;
 `
 export const ButtonsContainer = styled.div`
     justify-content: center;

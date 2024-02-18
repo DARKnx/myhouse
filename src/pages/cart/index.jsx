@@ -2,31 +2,38 @@ import React, { useEffect, useState }from 'react';
 import { AiOutlineDelete } from "react-icons/ai";
 import { toast } from 'react-toastify';
 
-
 import { Container, Box, TextContainer, IconContainer } from './styles';
 import Loading from '../../components/loading';
 import Navinfo from '../../components/navinfo';
 import Layout from '../../components/layout';
 import cartAction from '../../actions/cart';
+import userAction from '../../actions/user';
+import categoryAction from '../../actions/category';
 import CartEditor from './editor';
 
 const Cart = () => {
-  const [cart, setCart] = useState(null);
+  const [category, setCategory] = useState(null);
   const [editor, setEditor] = useState(null);
+  const [cart, setCart] = useState(null);
+  const [user, setUser] = useState(null);
 
-  const getCart = async () => {
-    const response = await cartAction.get();
-    if (response.error){
-        return toast.error("Erro ao carregar carrinho.");
-    }
-    setCart(response);
+  const getData = async () => {
+    const [cartResponse, categoryResponse, userResponse] = await Promise.all([
+      cartAction.get(),
+      categoryAction.get(),
+      userAction.get()
+    ]);
+    if (cartResponse.error || categoryResponse.error || userResponse.error) return toast.error("erro ao carregar informações")
+    setCategory(categoryResponse);
+    setCart(cartResponse);
+    setUser(userResponse);
   }
 
   const deleteCart = async (id) => {
     const send = async () => {
       const response =  await cartAction.remove({id});
       if (response.error) throw error;
-      return getCart();
+      return getData();
     }
     toast.promise(send(), {
       pending: `apagando item`,
@@ -36,11 +43,11 @@ const Cart = () => {
   }
 
   useEffect(() => {
-    getCart()
+    getData()
   }, [])
 
   if (!cart) return <Loading layout/>
-  if (editor != null) return <CartEditor data={cart} id={editor != true ? editor : null} onBack={() => setEditor(null) & getCart()}/> 
+  if (editor != null) return <CartEditor data={cart} id={editor != true ? editor : null} onBack={() => setEditor(null) & getData()} category={category} user={user}/> 
 
   return (
     <Layout>
