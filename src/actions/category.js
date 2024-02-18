@@ -1,8 +1,8 @@
 import api from "../services/api";
 
-const me = async () => {
+const get = async () => {
     try {
-        const response = await api.get('/user/me');
+        const response = await api.get('/category/get');
         return response.data;
     } catch (error) {
         return { error: error?.response?.data?.msg };
@@ -11,7 +11,24 @@ const me = async () => {
 
 const update = async (data) => {
     try {
-        const response = await api.put('/user/update', { data });
+        const response = await api.put('/category/update', data);
+        return response.data;
+    } catch (error) {
+        return { error: error?.response?.data?.msg };
+    }
+}
+
+const remove = async (data) => {
+    try {
+        const response = await api.delete('/category/update', data);
+        return response.data;
+    } catch (error) {
+        return { error: error?.response?.data?.msg };
+    }
+}
+const create = async ({data}) => {
+    try {
+        const response = await api.delete('/category/update', data);
         return response.data;
     } catch (error) {
         return { error: error?.response?.data?.msg };
@@ -19,5 +36,5 @@ const update = async (data) => {
 }
 
 export default {
-    signIn, signUp, me, update
+    get, update, remove, create
 }
