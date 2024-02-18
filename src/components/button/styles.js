@@ -2,8 +2,8 @@
 import styled from 'styled-components'
 
 export const Container = styled.button`
-  background: ${({ theme }) => theme.gradient.primary};
-  color: ${({ theme }) => theme.colors.secondaryText};
+  background: ${({ theme, color}) => theme.gradient[color]};
+  color: ${({ theme, text}) => theme.colors[text]};
   padding: ${({ padding }) => padding};
   width: ${({width}) => width};
   letter-spacing: 1.5px;
@@ -15,6 +15,7 @@ export const Container = styled.button`
 
   &:hover {
       color: ${({ theme }) => theme.colors.text};
+      filter: brightness(1.5);
       transform: scale(1.05);
       transition: 0.5s;
       cursor: pointer;

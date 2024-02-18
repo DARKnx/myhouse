@@ -18,7 +18,8 @@ const CategoryEditor = ({categorys, id}) => {
               <Box>
                 <Input placeholder={"Nome"} value={data.name} setValue={(x) => setData({...data, name: x})}/>
                 <Input placeholder={"Descrição"} value={data.description} setValue={(x) => setData({...data, description: x})}/>
-                <Button name={id ? "ATUALIZAR" : "CRIAR "} onClick={sendData}/>
+                <Button name={"APAGAR"} color='error'  text='text' onClick={sendData}/>
+                <Button name={id ? "ATUALIZAR" : "CRIAR"} onClick={sendData}/>
               </Box>
             </Container>
         </Layout>
