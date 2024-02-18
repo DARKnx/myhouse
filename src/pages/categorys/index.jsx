@@ -20,6 +20,7 @@ const Categorys = () => {
         return toast.error("Erro ao carregar categorias.");
     }
     setCategorys(response);
+    console.log(response.length)
   }
 
   const deleteCategory = async (id) => {
@@ -44,7 +45,7 @@ const Categorys = () => {
 
   return (
     <Layout>
-      <Navinfo name={"Categorias"} subname={"categorias"} buttonName={"adicionar"} size={categorys.lenght || 0} onButton={() => setEditor(true)}/>
+      <Navinfo name={"Categorias"} subname={"categorias"} buttonName={"adicionar"} size={categorys.length || 0} onButton={() => setEditor(true)}/>
       <Container>
           {
             categorys.map((item, index) => {
@@ -55,7 +56,7 @@ const Categorys = () => {
                     <p>{item.description ? item.description : "sem descrição."}</p>
                   </TextContainer>
                   <IconContainer> 
-                    <AiOutlineDelete className="icon"  size={30} onClick={() => deleteCategory(item._id)}/>
+                    <AiOutlineDelete class="icon" size={30} onClick={() => deleteCategory(item._id)}/>
                   </IconContainer>
                 </Box>
               )
