@@ -26,9 +26,9 @@ const remove = async (data) => {
         return { error: error?.response?.data?.msg };
     }
 }
-const create = async ({data}) => {
+const create = async (data) => {
     try {
-        const response = await api.delete('/category/update', data);
+        const response = await api.post('/category/create', data);
         return response.data;
     } catch (error) {
         return { error: error?.response?.data?.msg };

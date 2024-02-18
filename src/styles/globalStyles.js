@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
  scroll-behavior: smooth;
  box-sizing: border-box;
 }
-p, a, h1 {
+p, a, h1, h2, h3, h4, h5 {
   color: ${({theme}) => theme.colors.text};
 }
 body {

@@ -7,7 +7,7 @@ import Navinfo from '../../components/navinfo';
 import category from '../../actions/category';
 import Layout from '../../components/layout';
 import CategoryEditor from './editor';
-import { Container } from './styles';
+import { Container, Box } from './styles';
 
 const Categorys = () => {
   const [categorys, setCategorys] = useState(null);
@@ -26,22 +26,23 @@ const Categorys = () => {
   }, [])
 
   if (!categorys) return <Loading layout/>
-  if (editor != null) return <CategoryEditor categorys={categorys} id={editor != true ? editor : null} onBack={() => setEditor(null)}/> 
+  if (editor != null) return <CategoryEditor data={categorys} id={editor != true ? editor : null} onBack={() => setEditor(null)}/> 
 
   return (
     <Layout>
       <Navinfo name={"Categorias"} subname={"categorias"} buttonName={"adicionar"} size={categorys.lenght || 0} onButton={() => setEditor(true)}/>
-      {
-        categorys.map((item, index) => {
-          return (
-            <div>
-              {item.name}
-              {item.description}
-            </div>
-          )
-        })
-      }
-
+      <Container>
+          {
+            categorys.map((item, index) => {
+              return (
+                <Box>
+                  <h3>{item.name}</h3>
+                  <p>{item.description ? item.description : "sem descrição."}</p>
+                </Box>
+              )
+            })
+          }
+      </Container>
     </Layout>
   );
 }
