@@ -3,12 +3,12 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { toast } from 'react-toastify';
 
 
+import { Container, Box, TextContainer, IconContainer } from './styles';
 import Loading from '../../components/loading';
 import Navinfo from '../../components/navinfo';
-import cartAction from '../../actions/category';
 import Layout from '../../components/layout';
+import cartAction from '../../actions/cart';
 import CartEditor from './editor';
-import { Container, Box, TextContainer, IconContainer } from './styles';
 
 const Cart = () => {
   const [cart, setCart] = useState(null);

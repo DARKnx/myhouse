@@ -2,24 +2,24 @@ import React, { useEffect, useState }from 'react';
 import { toast } from 'react-toastify';
 
 import { Container, Box, ButtonsContainer } from './styles';
-import category from '../../../actions/category';
 import Layout from '../../../components/layout';
 import Button from '../../../components/button';
 import Input from '../../../components/input';
+import cart from '../../../actions/cart';
 
 const CartEditor = ({data, id, onBack}) => {
     const [values, setValues] = useState({name:"", description:""});
 
     const sendData = async () => {  
         const send = async () => {
-          const response =  id ? await category.update({data: values, id}) : await category.create(values);
+          const response =  id ? await cart.update({data: values, id}) : await cart.create(values);
           if (response.error) throw error;
           return setTimeout(onBack, 500);
         }
         toast.promise(send(), {
-          pending: `${id ? 'atualizando' : 'criando'} categoria`,
-          success: `categoria ${id ? 'atualizada' : 'criada'} com sucesso`,
-          error: `erro ao ${id ? 'atualizar' : 'criar'} categoria`
+          pending: `${id ? 'atualizando' : 'criando'} item`,
+          success: `item ${id ? 'atualizada' : 'criada'} com sucesso`,
+          error: `erro ao ${id ? 'atualizar' : 'criar'} item`
         })
     }
 
