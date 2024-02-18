@@ -20,7 +20,7 @@ const update = async (data) => {
 
 const remove = async (data) => {
     try {
-        const response = await api.delete('/category/update', data);
+        const response = await api.delete('/category/delete', {data});
         return response.data;
     } catch (error) {
         return { error: error?.response?.data?.msg };

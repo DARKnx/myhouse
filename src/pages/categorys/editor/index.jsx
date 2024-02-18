@@ -27,7 +27,7 @@ const CategoryEditor = ({data, id, onBack}) => {
 
     return (
         <Layout>
-            <Container>|
+            <Container>
               <Box>
                 <Input placeholder={"Nome"} value={values.name} setValue={(x) => setValues({...values, name: x})}/>
                 <Input placeholder={"Descrição"} value={values.description} setValue={(x) => setValues({...values, description: x})}/>
