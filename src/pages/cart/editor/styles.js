@@ -32,3 +32,9 @@ export const Label = styled.label`
     color: ${({theme}) => theme.colors.secondaryText};
     margin: 5px 0;
 `
+
+export const LabelContainer = styled.div`
+    justify-content: left;
+    display: flex;
+    width: 100%;
+`

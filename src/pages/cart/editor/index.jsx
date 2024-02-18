@@ -1,14 +1,15 @@
 import React, { useEffect, useState }from 'react';
 import { toast } from 'react-toastify';
 
-import { Container, Box, ButtonsContainer } from './styles';
+import { Container, Box, ButtonsContainer, LabelContainer, Label } from './styles';
+import ColorRadio from '../../../components/colorRadio';
 import Layout from '../../../components/layout';
 import Button from '../../../components/button';
 import Input from '../../../components/input';
 import cart from '../../../actions/cart';
 
 const CartEditor = ({data, id, onBack}) => {
-    const [values, setValues] = useState({name:"", description:""});
+    const [values, setValues] = useState({name:"", description:"", priority: 1});
 
     const sendData = async () => {  
         const send = async () => {
@@ -23,7 +24,7 @@ const CartEditor = ({data, id, onBack}) => {
         })
     }
 
-    useEffect(() =>  setValues({...data.find(x => x._id == id)}), []);
+  if (id) useEffect(() =>  setValues({...data.find(x => x._id == id)}), []);
 
     return (
         <Layout>
@@ -31,6 +32,10 @@ const CartEditor = ({data, id, onBack}) => {
               <Box>
                 <Input placeholder={"Nome"} value={values.name} setValue={(x) => setValues({...values, name: x})}/>
                 <Input placeholder={"Descrição"} value={values.description} setValue={(x) => setValues({...values, description: x})}/>
+                <LabelContainer>
+                  <Label>Nivel de prioridade</Label>
+                </LabelContainer>
+                  <ColorRadio value={values.priority} setValue={(x) => setValues({...values, priority: x})}/>
                 <ButtonsContainer>
                   <Button name={"CANCELAR"} color='error'  text='text' width="50%" onClick={onBack}/>
                   <Button name={id ? "ATUALIZAR" : "CRIAR"}  width="50%" onClick={sendData}/>
