@@ -39,3 +39,34 @@ export const LabelContainer = styled.div`
     display: flex;
     width: 100%;
 `
+
+export const InputContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    align-items: center;
+`
+
+export const IconContainer = styled.div`
+    background-color: ${({theme}) => theme.colors.background};
+    color: ${({theme}) => theme.colors.text};
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin: 0 10px;
+    display: flex;
+    padding: 7px;
+    height: 100%;
+    width: auto;
+
+    .icon:hover{
+        transition: 0.5s;
+        color: red;
+    }
+    .icon-add:hover{
+        transition: 0.5s;
+        color: #02f479;
+    }
+`

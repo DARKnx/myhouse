@@ -1,19 +1,22 @@
+import { AiOutlineDelete, AiOutlinePlus } from 'react-icons/ai';
 import React, { useEffect, useState }from 'react';
 import { toast } from 'react-toastify';
 
-import { Container, Box, ButtonsContainer, LabelContainer, Label } from './styles';
+import { Container, Box, ButtonsContainer, LabelContainer, Label, InputContainer, IconContainer } from './styles';
 import ColorRadio from '../../../components/colorRadio';
+import Dropdown from '../../../components/dropdown';
 import Layout from '../../../components/layout';
+import Slider from '../../../components/slider';
 import Button from '../../../components/button';
 import Input from '../../../components/input';
 import cart from '../../../actions/cart';
-import Dropdown from '../../../components/dropdown';
-import Slider from '../../../components/slider';
 
 const CartEditor = ({data, id, onBack, user, category}) => {
-    const [values, setValues] = useState({name:"", description:"", priority: 1, status: "", author:"", value: 0});
+    const [values, setValues] = useState({name:"", description:"", priority: 1, status: "", author:"", value: 0, links:[""]});
 
     const sendData = async () => {  
+        var links = values.links.filter(x => x.length !== 0);
+        setValues({...values, links});
         const send = async () => {
           const response =  id ? await cart.update({data: values, id}) : await cart.create(values);
           if (response.error) throw error;
@@ -60,6 +63,31 @@ const CartEditor = ({data, id, onBack, user, category}) => {
                   <Label>Valor</Label>
                 </LabelContainer>
                 <Slider value={values.value} setValue={(x) => setValues({...values, value: x})}/>
+                <LabelContainer>
+                  <Label>Links</Label>
+                </LabelContainer>
+                { 
+                    values.links.map((item, index) => {
+                      return (
+                        <InputContainer>                        
+                            <Input key={index} placeholder={'url'} value={item} setValue={(x) => {
+                                var links = values.links;
+                                links[index] = x;
+                                if (links.length == (index + 1)) links = [...links, ""]
+                                setValues({...values, links})
+                              
+                            }} />
+                            <IconContainer>
+                               <AiOutlineDelete class="icon" size={30} onClick={() => setValues({...values, links: values.links.filter((x, i) => i != index)})}/>
+                            </IconContainer>
+                        </InputContainer>
+                      )
+                    })
+
+                }
+                    <IconContainer>
+                    <AiOutlinePlus class="icon-add" size={25} onClick={() => setValues({...values, links: [...values.links, ""]})}/>
+                 </IconContainer>
                 <ButtonsContainer>
                   <Button name={"CANCELAR"} color='error'  text='text' width="50%" onClick={onBack}/>
                   <Button name={id ? "ATUALIZAR" : "CRIAR"}  width="50%" onClick={sendData}/>
