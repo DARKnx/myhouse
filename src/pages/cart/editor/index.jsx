@@ -45,26 +45,6 @@ const CartEditor = ({data, id, onBack, user, category}) => {
                 </LabelContainer>
                 <Input placeholder={"Descrição"} value={values.description} setValue={(x) => setValues({...values, description: x})}/>
                 <LabelContainer>
-                  <Label>Nivel de prioridade</Label>
-                </LabelContainer>
-                  <ColorRadio value={values.priority} setValue={(x) => setValues({...values, priority: x})}/>
-                <LabelContainer>
-                  <Label>Status</Label>
-                </LabelContainer>
-                  <Dropdown options={['não comprado', 'comprado', 'em analise', 'já temos']} value={values.status} setValue={(x) => setValues({...values, status: x})}/>
-                <LabelContainer>
-                  <Label>Responsavel</Label>
-                </LabelContainer>
-                  <Dropdown options={user.map(x => x.name)} value={values.author} setValue={(x) => setValues({...values, author: x})}/>
-                <LabelContainer>
-                  <Label>Categoria</Label>
-                </LabelContainer>
-                  <Dropdown options={category.map(x => x.name)} value={values.category} setValue={(x) => setValues({...values, category: x})}/>
-                <LabelContainer>
-                  <Label>Valor</Label>
-                </LabelContainer>
-                <Slider value={values.value} setValue={(x) => setValues({...values, value: x})}/>
-                <LabelContainer>
                   <Label>Links</Label>
                 </LabelContainer>
                 { 
@@ -86,6 +66,26 @@ const CartEditor = ({data, id, onBack, user, category}) => {
                     })
 
                 }
+                <LabelContainer>
+                  <Label>Nivel de prioridade</Label>
+                </LabelContainer>
+                  <ColorRadio value={values.priority} setValue={(x) => setValues({...values, priority: x})}/>
+                <LabelContainer>
+                  <Label>Status</Label>
+                </LabelContainer>
+                  <Dropdown options={['não comprado', 'comprado', 'em analise', 'já temos']} value={values.status} setValue={(x) => setValues({...values, status: x})}/>
+                <LabelContainer>
+                  <Label>Responsavel</Label>
+                </LabelContainer>
+                  <Dropdown options={user.map(x => x.name)} value={values.author} setValue={(x) => setValues({...values, author: x})}/>
+                <LabelContainer>
+                  <Label>Categoria</Label>
+                </LabelContainer>
+                  <Dropdown options={category.map(x => x.name)} value={values.category} setValue={(x) => setValues({...values, category: x})}/>
+                <LabelContainer>
+                  <Label>Valor</Label>
+                </LabelContainer>
+                <Slider value={values.value} setValue={(x) => setValues({...values, value: x})}/>
                     <IconContainer>
                     <AiOutlinePlus class="icon-add" size={25} onClick={() => setValues({...values, links: [...values.links, ""]})}/>
                  </IconContainer>

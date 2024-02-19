@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    padding: 2.5%;
     display: flex;
-    height: 100%;
+    height: auto;
     width: 100%;
 `
 
@@ -14,7 +15,7 @@ export const Box = styled.div`
     flex-direction: column;
     border-radius: 5px;
     align-items: center;
-    padding: 5vw 5vh;
+    padding: 20px 50px;
     display: flex;
     height: auto;
     width: 60%;
