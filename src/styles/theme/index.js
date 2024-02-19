@@ -19,6 +19,15 @@ export const theme = {
     slices: [
         { color: "#0d0d8f" }, 
         { color: "#5210b9" }, 
-        { color: "#043370" }
+        { color: "#043370" },
+        { color: "#0d0d8f" }, 
+        { color: "#5210b9" }, 
+        { color: "#043370" },
+        { color: "#0d0d8f" }, 
+        { color: "#5210b9" }, 
+        { color: "#043370" },
+        { color: "#0d0d8f" }, 
+        { color: "#5210b9" }, 
+        { color: "#043370" },
       ]
 }

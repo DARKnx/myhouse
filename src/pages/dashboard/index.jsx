@@ -136,6 +136,60 @@ const Dashboard = () => {
     ]}
   />
       </Row>
+      <Row>
+  <GraficoPizza
+    name={'Itens por Prioridade'}
+    data={[
+      ['Prioridade', 'Quantidade'],
+      ['1 - tranquilo', filterData.data.filter(x => x.priority === 1).length],
+      ['2 - médio', filterData.data.filter(x => x.priority === 2).length],
+      ['3 - prioridade', filterData.data.filter(x => x.priority === 3).length],
+    ]}
+  />
+  <GraficoPizza
+    name={'Valor por Prioridade'}
+    data={[
+      ['Prioridade', 'Valor'],
+      ['1 - tranquilo', filterData.data.filter(x => x.priority === 1).reduce((acc, x) => acc + x.value, 0)],
+      ['2 - médio', filterData.data.filter(x => x.priority === 2).reduce((acc, x) => acc + x.value, 0)],
+      ['3 - prioridade', filterData.data.filter(x => x.priority === 3).reduce((acc, x) => acc + x.value, 0)],
+    ]}
+  />
+</Row>
+<Row>
+  <GraficoPizza
+    name={'Itens por Categoria'}
+    data={[
+      ['Categoria', 'Quantidade'],
+      ...Array.from(new Set(filterData.data.filter(x => x.category).map(x => x.category))).map(category => [category, filterData.data.filter(x => x.category === category).length]),
+    ]}
+  />
+  <GraficoPizza
+    name={'Valor por Categoria'}
+    data={[
+      ['Categoria', 'Valor'],
+      ...Array.from(new Set(filterData.data.filter(x => x.category).map(x => x.category))).map(category => [category, filterData.data.filter(x => x.category === category).reduce((acc, x) => acc + x.value, 0)]),
+    ]}
+  />
+</Row>
+<Row>
+  <GraficoPizza
+    name={'Itens por Usuário'}
+    data={[
+      ['Usuário', 'Quantidade'],
+      ...Array.from(new Set(filterData.data.filter(x => x.author).map(x => x.author))).map(author => [author, filterData.data.filter(x => x.author === author).length]),
+      ['Sem Usuário', filterData.data.filter(x => !x.author).length],
+    ]}
+  />
+  <GraficoPizza
+    name={'Valor por Usuário'}
+    data={[
+      ['Usuário', 'Valor'],
+      ...Array.from(new Set(filterData.data.filter(x => x.author).map(x => x.author))).map(author => [author, filterData.data.filter(x => x.author === author).reduce((acc, x) => acc + x.value, 0)]),
+      ['Sem Usuário', filterData.data.filter(x => !x.author).reduce((acc, x) => acc + x.value, 0)],
+    ]}
+  />
+</Row>
     </Layout>
   );
 }
