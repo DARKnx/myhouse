@@ -2,14 +2,16 @@ import React, { useEffect, useState }from 'react';
 import { AiOutlineDelete } from "react-icons/ai";
 import { toast } from 'react-toastify';
 
-import { Container, Box, TextContainer, IconContainer } from './styles';
+import { Container, Box, TextContainer, IconContainer, Label, TextBox } from './styles';
+import categoryAction from '../../actions/category';
 import Loading from '../../components/loading';
 import Navinfo from '../../components/navinfo';
 import Layout from '../../components/layout';
 import cartAction from '../../actions/cart';
 import userAction from '../../actions/user';
-import categoryAction from '../../actions/category';
 import CartEditor from './editor';
+import formatCurrency from '../../services/formatCurrency';
+import addHttpsLink from '../../services/addHttpsLink';
 
 const Cart = () => {
   const [category, setCategory] = useState(null);
@@ -58,8 +60,40 @@ const Cart = () => {
               return (
                 <Box key={index}>
                   <TextContainer  onClick={() => setEditor(item._id)}>
-                    <h3>{item.name}</h3>
-                    <p>{item.description ? item.description : "sem descrição."}</p>
+                    <Label >Nome</Label>
+                    <TextBox>
+                        {item.name ? item.name : "sem nome."}
+                    </TextBox>
+                    <Label >Descrição</Label>
+                    <TextBox>
+                        {item.description ? item.description : "sem descrição."}
+                    </TextBox>
+                    <Label >Status</Label>
+                    <TextBox>
+                        {item.status ? item.status : "sem status."}
+                    </TextBox>
+                    <Label >Responsavel</Label>
+                    <TextBox>
+                        {item.author ? item.author : "sem responsavel."}
+                    </TextBox>
+                    <Label >Categoria</Label>
+                    <TextBox>
+                        {item.category ? item.category : "sem categoria."}
+                    </TextBox>
+                    <Label >Valor</Label>
+                    <TextBox>
+                        {item.value ? formatCurrency(item.value) : "sem valor."}
+                    </TextBox>
+                    <Label >Links</Label>
+                    <TextBox>
+                        {
+                          item.links.map((x, index) => {
+                            return (
+                              <a  key={index} href={addHttpsLink(x)} target='_blanck'>{index} - {x.slice(0, 100)}{x.length > 100 ? '...' : ''}<br></br></a>
+                            )
+                          })
+                        }
+                    </TextBox>
                   </TextContainer>
                   <IconContainer> 
                     <AiOutlineDelete class="icon" size={30} onClick={() => deleteCart(item._id)}/>

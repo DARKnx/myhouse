@@ -13,7 +13,7 @@ export const Box = styled.div`
     background-color: ${({theme}) => theme.colors.secondaryBackground};
     border-radius: 5px;
     padding: 20px 50px;
-    margin: 5px 0;
+    margin: 10px 0;
     display: flex;
     height: auto;
     width: 70%;
@@ -30,14 +30,6 @@ export const TextContainer = styled.div`
     display: flex;
     height: 100%;
     width: 90%;
-
-        h3{
-            margin-bottom: 15px;
-        }
-
-        p {
-            color: ${({theme}) => theme.colors.secondaryText};
-        }
 `
 
 export const IconContainer = styled.div`
@@ -52,4 +44,27 @@ export const IconContainer = styled.div`
         transition: 0.5s;
         color: red;
     }
+`
+
+export const Label = styled.label`
+    color: ${({theme}) => theme.colors.secondaryText};
+    font-weight: 600;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    `
+
+export const TextBox = styled.div`
+    background-color: ${({theme}) => theme.colors.background};
+    color: ${({theme}) => theme.colors.secondaryText};
+    border-radius: 5px;
+    padding: 15px;
+    margin: 5px 0;
+    height: auto;
+    width: 100%;
+
+    a {
+        margin: 5px;
+    }
+
+    
 `
