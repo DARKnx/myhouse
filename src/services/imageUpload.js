@@ -22,11 +22,9 @@ const imageUpload = async (images) => {
       return response.data.data.link;
     });
 
-    const results = await Promise.all(uploadPromises);
-
-    console.log("All uploads completed:", results);
+    return await Promise.all(uploadPromises);
   } catch (error) {
-    console.error("Error during image upload:", error);
+    return { error: "Erro ao fazer upload"};
   }
 };
 

@@ -4,23 +4,23 @@ import { toast } from 'react-toastify';
 
 import { Container, Box, ButtonsContainer, LabelContainer, Label, InputContainer, IconContainer } from './styles';
 import ColorRadio from '../../../components/colorRadio';
+import imageUpload from '../../../services/imageUpload';
 import Dropdown from '../../../components/dropdown';
+import Dropzone from '../../../components/dropzone';
 import Layout from '../../../components/layout';
 import Slider from '../../../components/slider';
 import Button from '../../../components/button';
 import Input from '../../../components/input';
 import cart from '../../../actions/cart';
-import Dropzone from '../../../components/dropzone';
-import imageUpload from '../../../services/imageUpload';
 
 const CartEditor = ({data, id, onBack, user, category}) => {
-    const [values, setValues] = useState({name:"", description:"", priority: 1, status: "", author:"", value: 0, links:[""], images:["https://www.infoescola.com/wp-content/uploads/2013/08/sol.jpg"]});
+    const [values, setValues] = useState({name:"", description:"", priority: 1, status: "", author:"", value: 0, links:[""], images:[]});
 
     const sendData = async () => {  
         var links = values.links.filter(x => x.length !== 0);
         setValues({...values, links});
         var images = await imageUpload(values.images);
-        return
+        setValues({...values, images})
         const send = async () => {
           const response =  id ? await cart.update({data: values, id}) : await cart.create(values);
           if (response.error) throw error;
