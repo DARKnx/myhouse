@@ -1,4 +1,5 @@
 import { Chart } from 'react-google-charts';
+import {theme} from '../../../styles/theme/index';
 import React from 'react';
 
 import Loading from '../../../components/loading';
@@ -11,13 +12,7 @@ const Pizza = ({name, data}) => {
     backgroundColor: '#363636', 
     legend: { textStyle: { color: '#ecf0f1' } }, 
     titleTextStyle: { color: '#ecf0f1' },
-    slices: [
-      { color: '#F37021' },
-      { color: '#8fc9f1' },
-      { color: '#f288e9' },
-      { color: '#71c39f' },
-      { color: '#9b59b6' },
-    ],
+    slices: theme.slices,
   };
 
   return (

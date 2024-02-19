@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Box, FiltersContainer} from './styles';
-
+import { Container, Box, FiltersContainer, DataContainer, BoxDataContainer, Row} from './styles';
 import formatCurrency from '../../services/formatCurrency';
 import addHttpsLink from '../../services/addHttpsLink';
 import categoryAction from '../../actions/category';
@@ -8,37 +7,78 @@ import Dropdown from '../../components/dropdown';
 import Loading from '../../components/loading';
 import Layout from '../../components/layout';
 import cartAction from '../../actions/cart';
+import GraficoPizza from './charts/pizza';
 import userAction from '../../actions/user';
 
 const Dashboard = () => {
-  const [filterData, setFilterData] = useState({data: null, filters: {category:"", author:"", priority:"", status:""}});
+  const [filterData, setFilterData] = useState({ data: null, filters: { category: "", author: "", priority: "", status: "" } });
   const [category, setCategory] = useState(null);
-  const [editor, setEditor] = useState(null);
   const [cart, setCart] = useState(null);
   const [user, setUser] = useState(null);
+  const [values, setValues] = useState({
+    singleValues: [
+      { value: '0', description: "Itens no carrinho" },
+      { value: "0", description: "Valor total carrinho" },
+      { value: "0", description: "Valor pago" },
+      { value: '0', description: "Valor pendente" },
+      { value: "0", description: "Dinheiro disponivel" },
+    ]
+  });
 
   const getData = async () => {
-    const [cartResponse, categoryResponse, userResponse] = await Promise.all([
-      cartAction.get(),
-      categoryAction.get(),
-      userAction.get()
-    ]);
-    if (cartResponse.error || categoryResponse.error || userResponse.error) return toast.error("erro ao carregar informações")
-    setFilterData({...filterData, data: cartResponse})
-    setCategory(categoryResponse);
-    setCart(cartResponse);
-    setUser(userResponse);
+    try {
+      const [cartResponse, categoryResponse, userResponse] = await Promise.all([
+        cartAction.get(),
+        categoryAction.get(),
+        userAction.get()
+      ]);
+      
+      if (cartResponse.error || categoryResponse.error || userResponse.error) {
+        console.error("Erro ao carregar informações");
+        return;
+      }
+
+      setCart(cartResponse);
+      setCategory(categoryResponse);
+      setUser(userResponse);
+      setFilterData({ data: cartResponse, filters: { category: "", author: "", priority: "", status: "" } });
+    } catch (error) {
+      console.error("Erro durante a obtenção de dados", error);
+    }
   }
 
-  const updatFilters = () => {
-    if (filterData.filters.priority) setFilterData({...filterData, data: cart.filter(x => x.priority == filterData.filters.priority)});
-    if (filterData.filters.category) setFilterData({...filterData, data: cart.filter(x => x.category == filterData.filters.category)});
-    if (filterData.filters.author) setFilterData({...filterData, data: cart.filter(x => x.author == filterData.filters.author)});
-    if (filterData.filters.status) setFilterData({...filterData, data: cart.filter(x => x.status == filterData.filters.status)});
-  }
+  const updateFilters = () => {
+    if (!cart || !filterData.data) {
+      console.error('Dados de carrinho nulos ou indefinidos.');
+      return;
+    }
+
+    const filteredData = cart.filter((x) => (
+      (!filterData.filters.priority || x.priority === filterData.filters.priority) &&
+      (!filterData.filters.category || x.category === filterData.filters.category) &&
+      (!filterData.filters.author || x.author === filterData.filters.author) &&
+      (!filterData.filters.status || x.status === filterData.filters.status)
+    ));
+
+    const valuesData = {
+      count: filteredData.length,
+      valueCount: filteredData.reduce((acc, x) => acc + x.value, 0),
+      payCount: filteredData.reduce((acc, x) => (x.status === "comprado" ? acc + x.value : acc), 0),
+      pendingCount: filteredData.reduce((acc, x) => ((x.status === "não comprado" || x.status === "em analise") ? acc + x.value : acc), 0),
+    };
+
+    setValues({
+      singleValues: [
+        { value: valuesData.count, description: "Itens no carrinho" },
+        { value: formatCurrency(valuesData.valueCount), description: "Valor total carrinho" },
+        { value: formatCurrency(valuesData.payCount), description: "Valor pago" },
+        { value: formatCurrency(valuesData.pendingCount), description: "Valor pendente" },
+        { value: formatCurrency(user.reduce((acc, x) => acc + x.wallet, 0)), description: "Dinheiro disponível" },
+      ],
+    });
+  };
 
   useEffect(() => {
-
     const params = new URLSearchParams(window.location.search);
     const reloadParam = params.get('reload');
 
@@ -48,23 +88,54 @@ const Dashboard = () => {
       window.history.replaceState({}, document.title, newUrl);
       window.location.reload();
     }
-    getData()
+
+    getData();
   }, []);
 
   useEffect(() => {
-    updatFilters();
-  }, [filterData.filters.author, filterData.filters.category, filterData.filters.status, filterData.filters.priority]);
+    updateFilters();
+  }, [filterData.filters.author, filterData.filters.category, filterData.filters.status, filterData.filters.priority, cart]);
 
-  if (!cart) return <Loading layout/>
+  if (!filterData.data) return <Loading layout/>;
 
   return (
     <Layout>
       <FiltersContainer>
-          <Dropdown options={user.map(x => x.name)} placeholder='responsavel' value={filterData.filters.author} setValue={(x) => setFilterData({...filterData, filters: { ...filterData.filters, author: x}})}/>
-          <Dropdown options={category.map(x => x.name)} placeholder='categoria' value={filterData.filters.category} setValue={(x) => setFilterData({...filterData, filters: { ...filterData.filters, category: x}})}/>
-          <Dropdown options={['não comprado', 'comprado', 'em analise', 'já temos']} placeholder='status' value={filterData.filters.status} setValue={(x) => setFilterData({...filterData, filters: { ...filterData.filters, status: x}})}/>
-          <Dropdown options={['1', '2', '3']} placeholder='prioridade' value={filterData.filters.priority} setValue={(x) => setFilterData({...filterData, filters: { ...filterData.filters, priority: x}})}/>
+        <Dropdown options={user.map(x => x.name)} placeholder='responsavel' value={filterData.filters.author} setValue={(x) => setFilterData({...filterData, filters: { ...filterData.filters, author: x}})}/>
+        <Dropdown options={category.map(x => x.name)} placeholder='categoria' value={filterData.filters.category} setValue={(x) => setFilterData({...filterData, filters: { ...filterData.filters, category: x}})}/>
+        <Dropdown options={['não comprado', 'comprado', 'em analise', 'já temos']} placeholder='status' value={filterData.filters.status} setValue={(x) => setFilterData({...filterData, filters: { ...filterData.filters, status: x}})}/>
+        <Dropdown options={['1', '2', '3']} placeholder='prioridade' value={filterData.filters.priority} setValue={(x) => setFilterData({...filterData, filters: { ...filterData.filters, priority: x}})}/>
       </FiltersContainer>
+      <DataContainer>
+        {values.singleValues?.map((item, i) => (
+          <BoxDataContainer key={i}>
+            <p>{item.value}</p>
+            <p>{item.description}</p>
+          </BoxDataContainer>
+        ))}
+      </DataContainer>
+      <Row>
+      <GraficoPizza
+    name={'Quantidade por Status'}
+    data={[
+      ['Status', 'Quantidade'],
+      ['não comprado', filterData.data.filter(x => x.status === 'não comprado').length || 0],
+      ['comprada', filterData.data.filter(x => x.status === 'comprado').length || 0],
+      ['em analise', filterData.data.filter(x => x.status === 'em analise').length || 0],
+      ['já temos', filterData.data.filter(x => x.status === 'já temos').length || 0],
+    ]}
+  />
+  <GraficoPizza
+    name={'Valor por Status'}
+    data={[
+      ['Status', 'Quantidade'],
+      ['não comprado', filterData.data.filter(x => x.status === 'não comprado').reduce((acc, x) => acc + x.value, 0) || 0],
+      ['comprado', filterData.data.filter(x => x.status === 'comprado').reduce((acc, x) => acc + x.value, 0) || 0],
+      ['em analise', filterData.data.filter(x => x.status === 'em analise').reduce((acc, x) => acc + x.value, 0) || 0],
+      ['já temos', filterData.data.filter(x => x.status === 'já temos').reduce((acc, x) => acc + x.value, 0) || 0],
+    ]}
+  />
+      </Row>
     </Layout>
   );
 }
