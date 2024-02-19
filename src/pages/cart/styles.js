@@ -93,3 +93,17 @@ export const ImageContainer = styled.div`
     margin: 15px 0;
     display: flex;
 `
+
+export const FiltersContainer = styled.div`
+    background-color: ${({theme}) => theme.colors.secondaryBackground};
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 5px;
+    margin-top: 50px;
+    margin: 0 auto;
+    display: flex;
+    padding: 20px;
+    height: auto;
+    width: 60%;
+`

@@ -5,6 +5,7 @@ export const Container = styled.div`
 
   width: 100%;
   height: 40px;
+  margin: 0 5px;
 
     .menu{
       background-color: ${({theme}) => theme.colors.background};

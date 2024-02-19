@@ -4,11 +4,11 @@ import React from 'react';
 
 import { Container } from './styles';
 
-const Dropdown = ({options=[], value, setValue}) => {	  
+const Dropdown = ({options=[], value, setValue, placeholder="Selecione uma opção"}) => {	  
 	  
 	  return (
 		<Container>
-			<DropdownComponent placeholderClassName="placeholder" controlClassName={'control'} className='root' menuClassName='menu' options={options} onChange={(x) => setValue(x.value)} value={value} placeholder="Selecione uma opção"/>
+			<DropdownComponent placeholderClassName="placeholder" controlClassName={'control'} className='root' menuClassName='menu' options={options} onChange={(x) => setValue(x.value)} value={value} placeholder={placeholder}/>
 		</Container>
 	)
 
