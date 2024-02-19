@@ -10,6 +10,7 @@ import Slider from '../../../components/slider';
 import Button from '../../../components/button';
 import Input from '../../../components/input';
 import cart from '../../../actions/cart';
+import Dropzone from '../../../components/dropzone';
 
 const CartEditor = ({data, id, onBack, user, category}) => {
     const [values, setValues] = useState({name:"", description:"", priority: 1, status: "", author:"", value: 0, links:[""]});
@@ -88,6 +89,10 @@ const CartEditor = ({data, id, onBack, user, category}) => {
                     <IconContainer>
                     <AiOutlinePlus class="icon-add" size={25} onClick={() => setValues({...values, links: [...values.links, ""]})}/>
                  </IconContainer>
+                 <LabelContainer>
+                  <Label>Imagens</Label>
+                </LabelContainer>
+                <Dropzone/>
                 <ButtonsContainer>
                   <Button name={"CANCELAR"} color='error'  text='text' width="50%" onClick={onBack}/>
                   <Button name={id ? "ATUALIZAR" : "CRIAR"}  width="50%" onClick={sendData}/>
