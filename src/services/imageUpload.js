@@ -17,7 +17,6 @@ const imageUpload = async (images) => {
 
       config.data = x;
       const response = await axios(config);
-      console.log(response);
 
       return response.data.data.link;
     });

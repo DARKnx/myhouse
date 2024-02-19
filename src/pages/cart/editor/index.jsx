@@ -17,24 +17,23 @@ const CartEditor = ({data, id, onBack, user, category}) => {
     const [values, setValues] = useState({name:"", description:"", priority: 1, status: "", author:"", value: 0, links:[""], images:[]});
 
     const sendData = async () => {  
+      const send = async () => {
         var links = values.links.filter(x => x.length !== 0);
-        setValues({...values, links});
         var images = await imageUpload(values.images);
-        setValues({...values, images})
-        const send = async () => {
-          const response =  id ? await cart.update({data: values, id}) : await cart.create(values);
-          if (response.error) throw error;
-          return setTimeout(onBack, 500);
-        }
-        toast.promise(send(), {
-          pending: `${id ? 'atualizando' : 'criando'} item`,
-          success: `item ${id ? 'atualizada' : 'criada'} com sucesso`,
-          error: `erro ao ${id ? 'atualizar' : 'criar'} item`
-        })
-    }
+        setValues({...values, images, links})
+        const response =  id ? await cart.update({data: {...values, links, images}, id}) : await cart.create({...values, links, images});
+        if (response.error) throw error;
+        return setTimeout(onBack, 500);
+      }
+      toast.promise(send(), {
+        pending: `${id ? 'atualizando' : 'criando'} item`,
+        success: `item ${id ? 'atualizada' : 'criada'} com sucesso`,
+        error: `erro ao ${id ? 'atualizar' : 'criar'} item`
+      })
+  }
 
   if (id) useEffect(() =>  setValues({...data.find(x => x._id == id)}), []);
-
+  
     return (
         <Layout>
             <Container>
@@ -53,7 +52,7 @@ const CartEditor = ({data, id, onBack, user, category}) => {
                 { 
                     values.links.map((item, index) => {
                       return (
-                        <InputContainer>                        
+                        <InputContainer key={ 'i-' + index}>                        
                             <Input key={index} placeholder={'url'} value={item} setValue={(x) => {
                                 var links = values.links;
                                 links[index] = x;
@@ -69,6 +68,9 @@ const CartEditor = ({data, id, onBack, user, category}) => {
                     })
 
                 }
+                <IconContainer>
+                    <AiOutlinePlus class="icon-add" size={25} onClick={() => setValues({...values, links: [...values.links, ""]})}/>
+                 </IconContainer>
                 <LabelContainer>
                   <Label>Nivel de prioridade</Label>
                 </LabelContainer>
@@ -89,9 +91,6 @@ const CartEditor = ({data, id, onBack, user, category}) => {
                   <Label>Valor</Label>
                 </LabelContainer>
                 <Slider value={values.value} setValue={(x) => setValues({...values, value: x})}/>
-                    <IconContainer>
-                    <AiOutlinePlus class="icon-add" size={25} onClick={() => setValues({...values, links: [...values.links, ""]})}/>
-                 </IconContainer>
                  <LabelContainer>
                   <Label>Imagens</Label>
                 </LabelContainer>
