@@ -17,6 +17,7 @@ export const Box = styled.div`
     display: flex;
     height: auto;
     width: 70%;
+    z-index: 5;
     
     &:hover{
         filter: brightness(1.035);
@@ -36,13 +37,21 @@ export const IconContainer = styled.div`
     color: ${({theme}) => theme.colors.text};
     justify-content: center;
     align-items: center;
-    margin: auto 0;
+    margin: 5px 0;
     display: flex;
     width: 10%;
+
+    .icon-edit, .icon {
+        margin: 10px 0;
+    }
 
     .icon:hover{
         transition: 0.5s;
         color: red;
+    }
+    .icon-edit:hover{
+        transition: 0.5s;
+        color: blue;
     }
 `
 
@@ -61,10 +70,26 @@ export const TextBox = styled.div`
     margin: 5px 0;
     height: auto;
     width: 100%;
+    z-index: 9;
 
     a {
         margin: 5px;
-    }
+    }   
+`
 
-    
+export const Image = styled.img`
+  border-radius: 5px;
+  object-fit: cover;
+  height: 200px;
+  margin: 0 5px;
+  width: 200px;
+  z-index: 10;
+`;
+
+export const ImageContainer = styled.div`
+    justify-content: left;
+    flex-direction: row;
+    align-items: center;
+    margin: 15px 0;
+    display: flex;
 `

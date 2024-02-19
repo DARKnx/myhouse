@@ -1,8 +1,8 @@
 import React, { useEffect, useState }from 'react';
-import { AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineEdit} from "react-icons/ai";
 import { toast } from 'react-toastify';
 
-import { Container, Box, TextContainer, IconContainer, Label, TextBox } from './styles';
+import { Container, Box, TextContainer, IconContainer, Label, TextBox, Image, ImageContainer } from './styles';
 import categoryAction from '../../actions/category';
 import Loading from '../../components/loading';
 import Navinfo from '../../components/navinfo';
@@ -29,6 +29,7 @@ const Cart = () => {
     setCategory(categoryResponse);
     setCart(cartResponse);
     setUser(userResponse);
+    console.log(cartResponse)
   }
 
   const deleteCart = async (id) => {
@@ -94,6 +95,16 @@ const Cart = () => {
                           })
                         }
                     </TextBox>
+                  <Label >Imagens</Label>
+                  <ImageContainer>
+                    {
+                      item.images.map((x, index) => {
+                        return (
+                          <Image key={index} src={x} alt={'imagem-' + index} onClick={() => window.open(x)}/>
+                        )
+                      })
+                    }
+                  </ImageContainer>
                   </TextContainer>
                   <IconContainer> 
                     <AiOutlineDelete class="icon" size={30} onClick={() => deleteCart(item._id)}/>
