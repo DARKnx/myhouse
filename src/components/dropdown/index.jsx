@@ -8,7 +8,9 @@ const Dropdown = ({options=[], value, setValue, placeholder="Selecione uma op√ß√
 	  
 	  return (
 		<Container>
-			<DropdownComponent placeholderClassName="placeholder" controlClassName={'control'} className='root' menuClassName='menu' options={options} onChange={(x) => setValue(x.value)} value={value} placeholder={placeholder}/>
+			<DropdownComponent placeholderClassName="placeholder" controlClassName={'control'} className='root' menuClassName='menu' options={options} onChange={(x) => {
+				setValue( value == x.value ? "" : x.value)
+			}} value={value} placeholder={placeholder}/>
 		</Container>
 	)
 

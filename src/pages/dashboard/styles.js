@@ -14,3 +14,17 @@ export const Box = styled.div`
     border-radius: 5px;
     padding: 5% 10%;
 `
+
+export const FiltersContainer = styled.div`
+    background-color: ${({theme}) => theme.colors.secondaryBackground};
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 5px;
+    margin-top: 50px;
+    margin: 0 auto;
+    display: flex;
+    padding: 20px;
+    height: auto;
+    width: 60%;
+`
