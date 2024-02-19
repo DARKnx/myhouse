@@ -1,25 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { toast } from 'react-toastify';
-import { ImageInputContainer, ImageLabel, Image, ImageContainer} from './styles';
+import { ImageInputContainer, ImageLabel, Image, ImageContainer } from './styles';
 
-const ImageInput = () => {
-  const [selectedImages, setSelectedImages] = useState([]);
-
+const ImageInput = ({ value, setValue }) => {
   const handleFileChange = (e) => {
     const files = e.target.files;
 
-    if (files.length + selectedImages.length > 7)  return toast.error('você só pode adicionar no máximo 7 imagens.');
+    if (files.length + value.length > 7) {
+      toast.error('Você só pode adicionar no máximo 7 imagens.');
+      return;
+    }
 
-    setSelectedImages((prevImages) => [...prevImages, ...files]);
-    toast.success("imagens adicionadas com sucesso")
-
+    const newImages = [...value, ...files];
+    setValue(newImages);
+    toast.success('Imagens adicionadas com sucesso');
   };
 
   const handleRemoveImage = (index) => {
-    const newImages = [...selectedImages];
+    const newImages = [...value];
     newImages.splice(index, 1);
-    setSelectedImages(newImages);
-    toast.success("imagem removida com sucesso")
+    setValue(newImages);
+    toast.success('Imagem removida com sucesso');
   };
 
   const handleDrop = (e) => {
@@ -27,10 +28,14 @@ const ImageInput = () => {
 
     const files = e.dataTransfer.files;
 
-    if (files.length + selectedImages.length > 7) return toast.error('você só pode adicionar no máximo 7 imagens.');
+    if (files.length + value.length > 7) {
+      toast.error('Você só pode adicionar no máximo 7 imagens.');
+      return;
+    }
 
-    setSelectedImages((prevImages) => [...prevImages, ...files]);
-    toast.success("imagens adicionadas com sucesso")
+    const newImages = [...value, ...files];
+    setValue(newImages);
+    toast.success('Imagens adicionadas com sucesso');
   };
 
   const handleDragOver = (e) => {
@@ -54,10 +59,14 @@ const ImageInput = () => {
         onChange={handleFileChange}
       />
       <ImageContainer>
-        {selectedImages.map((image, index) => (
-         <div key={index} onClick={() => handleRemoveImage(index) }>
-             <Image src={URL.createObjectURL(image)} alt={`Imagem não carregada`} />
-         </div>
+        {value.map((image, index) => (
+          <div key={index} onClick={() => handleRemoveImage(index)}>
+            {typeof image === 'string' ? (
+              <Image src={image} alt={`Imagem ${index + 1}`} />
+            ) : (
+              <Image src={URL.createObjectURL(image)} alt={`Imagem ${index + 1}`} />
+            )}
+          </div>
         ))}
       </ImageContainer>
     </ImageInputContainer>

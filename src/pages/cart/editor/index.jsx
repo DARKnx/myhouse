@@ -13,7 +13,7 @@ import cart from '../../../actions/cart';
 import Dropzone from '../../../components/dropzone';
 
 const CartEditor = ({data, id, onBack, user, category}) => {
-    const [values, setValues] = useState({name:"", description:"", priority: 1, status: "", author:"", value: 0, links:[""]});
+    const [values, setValues] = useState({name:"", description:"", priority: 1, status: "", author:"", value: 0, links:[""], images:["https://www.infoescola.com/wp-content/uploads/2013/08/sol.jpg"]});
 
     const sendData = async () => {  
         var links = values.links.filter(x => x.length !== 0);
@@ -92,7 +92,7 @@ const CartEditor = ({data, id, onBack, user, category}) => {
                  <LabelContainer>
                   <Label>Imagens</Label>
                 </LabelContainer>
-                <Dropzone/>
+                <Dropzone value={values.images} setValue={(x) => setValues({...values, images: x})}/>
                 <ButtonsContainer>
                   <Button name={"CANCELAR"} color='error'  text='text' width="50%" onClick={onBack}/>
                   <Button name={id ? "ATUALIZAR" : "CRIAR"}  width="50%" onClick={sendData}/>
