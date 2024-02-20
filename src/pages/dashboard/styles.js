@@ -64,10 +64,11 @@ export const BoxDataContainer = styled.div`
 
     }
 
-    @media (max-width: 110px) { 
-        padding: 20px;
-   }  
-`
+    @media (max-width: 800px) { 
+        margin: 25px 10px;
+    }  
+
+    `
 export const DataContainer = styled.div`
     flex-direction: row;
     justify-content: center;
@@ -75,6 +76,9 @@ export const DataContainer = styled.div`
     display: flex;
     height: auto;
     width: auto;
+    @media (max-width: 800px) { 
+        flex-wrap: wrap;
+    }  
 `
 
 export const Row = styled.div`
