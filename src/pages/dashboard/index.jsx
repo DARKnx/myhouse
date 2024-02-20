@@ -54,7 +54,7 @@ const Dashboard = () => {
     }
 
     const filteredData = cart.filter((x) => (
-      (!filterData.filters.priority || x.priority === filterData.filters.priority) &&
+      (!filterData.filters.priority || x.priority == filterData.filters.priority) &&
       (!filterData.filters.category || x.category === filterData.filters.category) &&
       (!filterData.filters.author || x.author === filterData.filters.author) &&
       (!filterData.filters.status || x.status === filterData.filters.status)
@@ -67,6 +67,7 @@ const Dashboard = () => {
       pendingCount: filteredData.reduce((acc, x) => ((x.status === "não comprado" || x.status === "em analise") ? acc + x.value : acc), 0),
     };
 
+    setFilterData({...filterData, data: filteredData});
     setValues({
       singleValues: [
         { value: valuesData.count, description: "Itens no carrinho" },

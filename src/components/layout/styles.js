@@ -54,17 +54,53 @@ export const MenuSelector = styled.button`
     inset: unset;
     height: 50px;
     padding: 5%;
-    width: 80%;
+    width: 90%;
 
+    .icon{
+        color: ${({theme}) => theme.colors.text};
+        font-size: clamp(15px, 20px, 25px);
+        margin-right: 14px;
+    }
     
     p {
         color: ${({theme}) => theme.colors.text};
         letter-spacing: 1.6px;
         line-height: normal;
-        margin-left: 15px;
         font-weight: 500;
-        font-size: 14px;
+        font-size: 12px;
+        
     }
+
+    @media (max-width: 767px) { 
+
+        justify-content: center;
+    p{
+        display: none;
+    }
+
+    } 
+    @media (max-width: 1150px) { 
+
+    justify-content: center;
+    p{
+       display: none;
+    }
+
+    } 
+    @media (max-width: 1400px) { 
+
+    padding: 1%;
+    width: 95%;
+    .icon{
+        margin-right: 5px;
+    }
+    p{
+       font-size: 12px;
+    }
+
+    } 
+
+
 
     &:hover{
         background-color: rgba(238, 238, 238, 0.085);

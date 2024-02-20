@@ -28,12 +28,12 @@ const Layout = ({ children, initialSelect = 'dashboard' }) => {
   return (
     <Container>
       <Menu>
-        <div className="buttons">
+        <div class="buttons">
               {stateFolders.map((menu, subIndex) => {
                 const Icon = menu.icon;
                 return (
                   <MenuSelector key={subIndex} onClick={() => handleMenuItemClick(menu)} select={menu.route === select}>
-                    <Icon color="#eeeeee" size={24} />
+                    <Icon class="icon" />
                     <p>{menu.name}</p>
                   </MenuSelector>
                 );
