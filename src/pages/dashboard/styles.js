@@ -66,6 +66,7 @@ export const BoxDataContainer = styled.div`
 
     @media (max-width: 800px) { 
         margin: 25px 10px;
+        width: 30%;
     }  
 
     `
