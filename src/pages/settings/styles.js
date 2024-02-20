@@ -15,7 +15,10 @@ export const Box = styled.div`
     justify-content: center;
     align-items: center;
     display: flex;
-    padding: 5vw 5vh;
+    padding: 20px;
     height: auto;
-    width: 30%;
+    width: 40%;
+    @media (max-width: 767px) { 
+        width: 90%;
+   }   
 `

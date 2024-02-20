@@ -108,7 +108,7 @@ const Cart = () => {
                         {
                           item.links.map((x, index) => {
                             return (
-                              <a  key={index} href={addHttpsLink(x)} target='_blanck'>{index} - {x.slice(0, 100)}{x.length > 100 ? '...' : ''}<br></br></a>
+                              <a  key={index} href={addHttpsLink(x)} target='_blanck'>{index} - {x.slice(0, 25)}{x.length > 25 ? '...' : ''}<br></br></a>
                             )
                           })
                         }

@@ -14,7 +14,7 @@ return (
 					</Size>
 				</Box>
 				<Box>
-					<Button Icon={Icon} name={buttonName} onClick={onButton}/>
+					<Button Icon={Icon}  width='100%' name={buttonName} onClick={onButton}/>
 				</Box>
 			</Container>
 	)

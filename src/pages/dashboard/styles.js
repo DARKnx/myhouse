@@ -27,6 +27,10 @@ export const FiltersContainer = styled.div`
     padding: 20px;
     height: auto;
     width: 60%;
+    @media (max-width: 1050px) { 
+        flex-wrap: wrap;
+        padding: 10px;
+   }   
 `
 export const BoxDataContainer = styled.div`
     background-color: ${({theme}) => theme.colors.secondaryBackground};
@@ -41,6 +45,8 @@ export const BoxDataContainer = styled.div`
     width: 25vw;
     padding: 1%;
 
+    width: 20%;
+
     p:nth-child(1){
         background: ${({theme}) => theme.gradient.text};
         -webkit-text-fill-color: transparent;
@@ -48,15 +54,19 @@ export const BoxDataContainer = styled.div`
         filter: brightness(1.5);
         letter-spacing: 1.6px;
         font-weight: 700;
-        font-size: 40px;
+        font-size: clamp(1.125rem, 0.6667rem + 1.4667vw, 2.5rem);
     }
     p:nth-child(2){
         color: ${({theme}) => theme.gradient.secondaryText};
         letter-spacing: 1.6px;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 15px;
 
     }
+
+    @media (max-width: 110px) { 
+        padding: 20px;
+   }  
 `
 export const DataContainer = styled.div`
     flex-direction: row;

@@ -18,6 +18,10 @@ export const Box = styled.div`
     height: auto;
     width: 70%;
     z-index: 5;
+    @media (max-width: 767px) { 
+        padding: 20px;
+        width: 95%;
+   }   
     
     &:hover{
         filter: brightness(1.035);
@@ -106,4 +110,8 @@ export const FiltersContainer = styled.div`
     padding: 20px;
     height: auto;
     width: 60%;
+    @media (max-width: 1050px) { 
+        flex-wrap: wrap;
+        padding: 10px;
+   }   
 `

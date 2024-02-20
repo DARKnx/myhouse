@@ -45,8 +45,8 @@ const Main = () => {
           <Input placeholder={"senha"} value={password} setValue={setPassword} />
         </InputsContainer>
         <ButtonsContainer>
-          <Button name={'CADASTRAR'} onClick={signUp} />
-          <Button name={'ENTRAR'} onClick={signIn} />
+          <Button name={'CADASTRAR'} width='50%' onClick={signUp} />
+          <Button name={'ENTRAR'} width='50%' onClick={signIn} />
         </ButtonsContainer>
       </Box>
     </Container>

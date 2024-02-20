@@ -17,7 +17,12 @@ export const Box = styled.div`
     display: flex;
     padding: 20px;
     height: 50%;
-    width: 30%;
+    width: 40%;
+    @media (max-width: 767px) { 
+        width: 90%;
+   }   
+
+
 `
 
 export const InputsContainer = styled.div`

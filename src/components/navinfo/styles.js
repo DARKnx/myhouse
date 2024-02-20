@@ -19,11 +19,12 @@ export const Box = styled.div`
     h3{
         color: ${({theme}) => theme.colors.text};
         letter-spacing: 1.5px;
-        font-size: 24px;
+        font-size: clamp(0.75rem, 0.4792rem + 0.8667vw, 1.5625rem);
     }
     `
 export const Size = styled.div`
     color: ${({theme}) => theme.colors.secondaryText};
+    font-size: clamp(0.625rem, 0.5208rem + 0.3333vw, 0.9375rem);
     border: 0.1px solid rgba(238, 238, 238, 0.35);
     justify-content: space-between;
     flex-direction: column;

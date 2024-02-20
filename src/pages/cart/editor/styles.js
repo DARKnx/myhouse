@@ -18,7 +18,10 @@ export const Box = styled.div`
     padding: 20px 50px;
     display: flex;
     height: auto;
-    width: 60%;
+    width: 75%;
+    @media (max-width: 767px) { 
+        width: 90%;
+   }  
 `
 export const ButtonsContainer = styled.div`
     justify-content: center;

@@ -9,6 +9,7 @@ export const Container = styled.button`
   letter-spacing: 1.5px;
   border-radius: 5px;
   font-weight: 600;
+  font-size: 12px;
   margin: 5px;
   border: none;
   inset: unset;
