@@ -88,4 +88,7 @@ export const Row = styled.div`
     align-items: center;
     margin: 2.5vh 0;
     display: flex;
+    @media (max-width: 800px) { 
+       flex-direction: column;
+    }  
 `
